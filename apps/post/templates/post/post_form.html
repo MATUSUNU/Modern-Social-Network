@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="container text-center pt-5">
+  <h1>Group Create</h1>
+  <br /><br />
+
+  {% if messages %}
+    <div class="container mt-3">
+      {% for message in messages %}
+        <div class="alert
+                    {% if 'error' in message.tags %}alert-danger{% endif %}
+                    {% if 'success' in message.tags %}alert-success{% endif %}
+                    {% if 'warning' in message.tags %}alert-warning{% endif %}
+                    {% if 'info' in message.tags %}alert-info{% endif %}
+                    " role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Create Post</button>
+  </form>
+{% endblock %}

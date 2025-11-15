@@ -96,15 +96,18 @@ CMDS  [Docker]:
 - docker logs <container-id>
 - docker stop <container-id>
 - docker rm <container-id>
+- docker compose down
 - docker compose down -v
 - docker compose -f docker-compose.prod.yml up -d --build
 - docker compose build --no-cache web  [if you created ".dockerignore" after the "first build"]
 - docker compose -f docker-compose.prod down -v
 - docker compose exec web poetry run python manage.py startapp upload
 - docker compose -f docker-compose.prod.yml exec web python manage.py startapp upload
+- docker compose exec web poetry run python manage.py createsuperuser
 ```
 Notes:-
 - "prune" deletes all <none> images not tagged or used by a container.
+- `docker compose exec web`: Open the web container, use Poetry’s virtualenv inside it, and run Django’s createsuperuser.
 
 ## General Role of Mounts
 Notes:-
