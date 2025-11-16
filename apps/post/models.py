@@ -28,6 +28,10 @@ class Post(models.Model):
   def num_likes(self):
       return self.likes.count()
 
+  @property
+  def num_comments(self):
+    return self.comments.count()
+
 
 class Like(models.Model):
   user = models.ForeignKey(

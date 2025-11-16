@@ -80,9 +80,10 @@
             </form>
           {% endif %}
 
-          <a href="{% url 'post:post_detail' pk=post.id %}" class="btn btn-sm btn-outline-secondary">
-            💬 Comment
-          </a>
+        <a href="{% url 'post:post_detail' pk=post.id %}"
+          class="btn btn-sm btn-outline-primary">
+          💬 {{ post.num_comments }} Comment{{ post.num_comments|pluralize }}
+        </a>
         </div>
       </div>
 
