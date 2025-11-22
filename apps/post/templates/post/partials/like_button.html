@@ -1,0 +1,20 @@
+{% load post_tags %}
+
+{% if user.is_authenticated %}
+    <form class="d-inline"
+          hx-post="{% url 'post:like_post' pk=post.id %}"
+          hx-target="this"
+          hx-swap="outerHTML">
+        {% csrf_token %}
+        <div class="like-section">
+            <button type="submit"
+                class="btn btn-sm {% if post|user_liked_post:request.user %}btn-success{% else %}btn-outline-success{% endif %}">
+                👍 {{ post.num_likes }} Like{{ post.num_likes|pluralize }}
+            </button>
+        </div>
+    </form>
+{% else %}
+    <a href="{% url 'account_login' %}" class="btn btn-sm btn-outline-success">
+        👍 {{ post.num_likes }} Like{{ post.num_likes|pluralize }}
+    </a>
+{% endif %}

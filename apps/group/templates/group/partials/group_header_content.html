@@ -1,0 +1,22 @@
+{% load group_tags %}
+
+<div>
+    <h5 class="card-title {% if is_owner %} mb-1 {% endif %}">{{ group.name }}</h5>
+    <p class="card-text">{{ group.description }}</p>
+    <p class="text-muted small">
+        👥 {{ group.num_member }} Member{{ group.num_member|pluralize }}
+    </p>
+
+    {% include 'group/partials/membership_button.html' %}
+</div>
+
+{% if is_owner %}
+  <div>
+      <a href="{% url 'group:group_update' pk=group.id %}" class="btn btn-sm btn-outline-primary me-2" title="Edit">
+          <i class="fas fa-edit"></i>
+      </a>
+      <a href="{% url 'group:group_delete' pk=group.id %}" class="btn btn-sm btn-outline-danger" title="Delete">
+          <i class="fas fa-trash-alt"></i>
+      </a>
+  </div>
+{% endif %}

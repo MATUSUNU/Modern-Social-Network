@@ -4,11 +4,13 @@
 {% block content %}
 
 <div class="container text-center pt-5">
-  <h1>Group Create</h1>
+  <h1>Group {% if form.instance.pk %} Update {% else %} Create {% endif %}</h1>
   <br /><br />
   <form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Create Group</button>
+    <button type="submit" class="btn btn-primary">
+      {% if form.instance.pk %} Update {% else %} Create {% endif %} Group
+    </button>
   </form>
 {% endblock %}

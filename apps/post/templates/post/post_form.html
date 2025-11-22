@@ -4,20 +4,22 @@
 {% block content %}
 
 <div class="container text-center pt-5">
-  <h1>Group Create</h1>
+  <h1>Group {% if form.instance.pk %} Update {% else %} Create {% endif %}</h1>
   <br /><br />
 
-  {% if messages %}
+  {% if messages and not form.instance.pk %}
     <div class="container mt-3">
       {% for message in messages %}
-        <div class="alert
-                    {% if 'error' in message.tags %}alert-danger{% endif %}
-                    {% if 'success' in message.tags %}alert-success{% endif %}
-                    {% if 'warning' in message.tags %}alert-warning{% endif %}
-                    {% if 'info' in message.tags %}alert-info{% endif %}
-                    " role="alert">
-          {{ message }}
-        </div>
+        {% if 'error' in message.tags %}
+          <div class="alert
+                      {% if 'error' in message.tags %}alert-danger{% endif %}
+                      {% if 'success' in message.tags %}alert-success{% endif %}
+                      {% if 'warning' in message.tags %}alert-warning{% endif %}
+                      {% if 'info' in message.tags %}alert-info{% endif %}
+                      " role="alert">
+            {{ message }}
+          </div>
+        {% endif %}
       {% endfor %}
     </div>
   {% endif %}
@@ -25,6 +27,8 @@
   <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Create Post</button>
+    <button type="submit" class="btn btn-primary">
+      {% if form.instance.pk %} Update {% else %} Create {% endif %} Post
+    </button>
   </form>
 {% endblock %}

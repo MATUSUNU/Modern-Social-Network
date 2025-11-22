@@ -4,6 +4,7 @@ from .views import (
   GroupListView, GroupDetailView,
   GroupCreateView, GroupUpdateView,
   GroupDeleteView, member_group,
+  group_posts,
 )
 
 app_name = "group"
@@ -16,4 +17,5 @@ urlpatterns = [
   path("<int:pk>/delete/", GroupDeleteView.as_view(), name="group_delete"),
 
   path("<int:pk>/member/", member_group, name="member_group"),
+  path('<int:pk>/posts/', group_posts, name='group_posts'),
 ]

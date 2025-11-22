@@ -1,0 +1,75 @@
+{% load post_tags group_tags %}
+
+{% if user.is_authenticated %}
+  <h1 class="text-center">Group Detail</h1>
+  <br /><br />
+
+  <div class="card mb-3">
+    <div class="card-body {% if is_owner %} d-flex justify-content-between align-items-center {% endif %}">
+
+      <div>
+
+        <h5 class="card-title {% if is_owner %} mb-1 {% endif %}">{{ group.name }}</h5>
+        <p class="card-text">{{ group.description }}</p>
+        <p class="text-muted small">
+          👥 {{ group.num_member }} Member{{ group.num_member|pluralize }}
+        </p>
+
+        {% include 'group/partials/membership_button.html' %}
+
+      </div>
+
+      {% if is_owner %}
+
+        <div>
+          <a href="{% url 'group:group_update' pk=group.id %}" class="btn btn-sm btn-outline-primary me-2" title="Edit">
+            <i class="fas fa-edit"></i>
+          </a>
+          <a href="{% url 'group:group_delete' pk=group.id %}" class="btn btn-sm btn-outline-danger" title="Delete">
+            <i class="fas fa-trash-alt"></i>
+          </a>
+        </div>
+
+      {% endif %}
+
+    </div>
+  </div>
+{% else %}
+  <h1>Group Detail</h1>
+  <br /><br />
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ group.name }}</h5>
+      <p class="card-text">{{ group.description }}</p>
+      <p class="text-muted small">
+        👥 {{ group.num_member }} Member{{ group.num_member|pluralize }}
+      </p>
+    </div>
+  </div>
+{% endif %}
+
+<h2 class="mb-4 mt-5">Posts in this Group</h2>
+
+<div id="group-posts-container">
+  {% include 'group/partials/group_posts.html' %}
+</div>
+
+<div class="d-flex justify-content-center my-4">
+    <div id="spinner" class="spinner-border htmx-indicator" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<style>
+    .htmx-indicator {
+        opacity: 0;
+        visibility: hidden;
+    }
+    .htmx-request .htmx-indicator,
+    .htmx-request.htmx-indicator {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 200ms ease-in;
+    }
+</style>

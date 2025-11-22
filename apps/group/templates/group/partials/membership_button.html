@@ -1,0 +1,27 @@
+{% load group_tags %}
+
+{% if group|user_joined_group:request.user %}
+
+  <!-- <form class="mt-3"
+        hx-post="{% url 'group:member_group' pk=group.id %}"
+        hx-target=".card-body"
+        hx-swap="innerHTML"
+  > -->
+  <form action="{% url 'group:member_group' pk=group.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-sm btn-outline-danger">Leave Group</button>
+  </form>
+
+{% else %}
+
+  <!-- <form class="mt-3"
+        hx-post="{% url 'group:member_group' pk=group.id %}"
+        hx-target=".card-body"
+        hx-swap="innerHTML"
+  > -->
+  <form action="{% url 'group:member_group' pk=group.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-sm btn-outline-success">Join Group</button>
+  </form>
+
+{% endif %}
