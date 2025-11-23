@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.core.exceptions import PermissionDenied
+from django.core.paginator import Paginator
 
 from .models import Post, Comment
 from apps.group.models import Group
@@ -44,7 +45,16 @@ class PostDetailView(DetailView):
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    context['comments'] = self.object.comments.all()
+
+    comments = self.object.comments.all().order_by('created_at')
+    paginator = Paginator(comments, 3)
+    # page_num = self.request.GET.get('page', 1)
+    page_obj = paginator.get_page(1)
+
+    context['comments'] = page_obj.object_list
+    context['page_obj'] = page_obj
+
+    # context['comments'] = self.object.comments.all()
     return context
 
 
@@ -158,3 +168,25 @@ def comment_delete(request, pk):
       return HttpResponse(count_html)
 
   return redirect("post:post_detail", pk=comment.post.id)
+
+def post_comments(request, pk):
+
+  import time
+  time.sleep(1)
+
+  post = get_object_or_404(Post, pk=pk)
+
+  comments = post.comments.all().order_by('created_at')
+  paginator = Paginator(comments, 3)
+  page_num = request.GET.get('page')
+  page_obj = paginator.get_page(page_num)
+
+  context = {
+    'post': post,
+    'comments': page_obj.object_list,
+    'page_obj': page_obj,
+    'request': request
+  }
+
+  template = 'post/partials/comment_item.html'
+  return render(request, template, context)

@@ -83,10 +83,27 @@
     </form>
 
     <div id="comments-list">
-      {% for comment in comments %}
-        {% include 'post/partials/comment_item.html' %}
-      {% endfor %}
+      {% include 'post/partials/comment_item.html' %}
     </div>
 
   </div>
 </div>
+
+<div class="d-flex justify-content-center my-4">
+    <div id="spinner" class="spinner-border htmx-indicator" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<style>
+    .htmx-indicator {
+        opacity: 0;
+        visibility: hidden;
+    }
+    .htmx-request .htmx-indicator,
+    .htmx-request.htmx-indicator {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 200ms ease-in;
+    }
+</style>

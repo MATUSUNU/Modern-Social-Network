@@ -5,6 +5,7 @@ from .views import (
   PostDetailView, PostUpdateView,
   PostDeleteView, like_post,
   comment_create, comment_delete,
+  post_comments,
 )
 
 
@@ -21,4 +22,5 @@ urlpatterns = [
   path("<int:pk>/comment/", comment_create, name="comment_create"),
   # path("<int:pk>/comment/update/", comment_update, name="comment_update"),
   path("<int:pk>/comment/delete/", comment_delete, name="comment_delete"),
+  path("<int:pk>/comments/", post_comments, name="post_comment"),
 ]
