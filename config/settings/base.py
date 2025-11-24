@@ -128,3 +128,10 @@ SOCIALACCOUNT_AUTO_SIGNUP = True
 
 # Login settings
 LOGIN_REDIRECT_URL = "home"
+
+
+# EMAIL BACKEND
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"

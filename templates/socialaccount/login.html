@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5 text-center">
+  <h2 class="mb-4">Redirecting…</h2>
+  <p class="text-muted">Connecting to your social account.</p>
+
+  <form method="post" id="socialLoginForm">
+    {% csrf_token %}
+    <input type="hidden" name="process" value="login">
+    <button type="submit" class="btn btn-primary d-none">Continue</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById('socialLoginForm').submit();
+</script>
+{% endblock %}
