@@ -49,6 +49,39 @@ social_app/
 
 ```
 
+
+# Cool Professional FrontEnd Project Layout
+```
+social_app/
+├── static_src/
+│   ├── sass/
+│   │   ├── base/
+│   │   │   ├── _variables.scss
+│   │   │   └── _typography.scss
+│   │   ├── layout/
+│   │   │   ├── _container.scss
+│   │   │   └── _header.scss
+│   │   ├── components/
+│   │   │   ├── _buttons.scss
+│   │   │   ├── _cards.scss
+│   │   │   └── _forms.scss
+│   │   ├── pages/
+│   │   │   └── _home.scss
+│   │   ├── vendor/
+│   │   │   └── _bootstrap.scss     # Bootstrap import wrapper
+│   │   └── main.scss
+│   └── js/
+│       ├── htmx_config.js
+│       └── bootstrap_init.js
+├── static/
+│   ├── css/
+│   │   └── main.css
+│   └── js/
+│       ├── htmx_config.js
+│       └── bootstrap_init.js
+└── package.json
+```
+
 Notes:-
 CMDS  [poetry]:
 ```
