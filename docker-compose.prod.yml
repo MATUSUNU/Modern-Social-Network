@@ -6,7 +6,7 @@ services:
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - static_volume:/usr/src/app/staticfiles
-      - media_volume:/home/app/web/mediafiles
+      - media_volume:/usr/src/app/mediafiles
 
     # ports:  # To test only for gunicorn (without Nginx)
     #   - 8000:8000
@@ -20,20 +20,20 @@ services:
   db:
     image: postgres:15
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data_prod:/var/lib/postgresql/data/
     env_file:
       - .env.prod.db
   nginx:
     build: ./nginx
     volumes:
       - static_volume:/usr/src/app/staticfiles
-      - media_volume:/home/app/web/mediafiles
+      - media_volume:/usr/src/app/mediafiles
     ports:
       - 1337:80
     depends_on:
       - web
 
 volumes:
-  postgres_data:
+  postgres_data_prod:
   static_volume:
   media_volume:

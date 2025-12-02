@@ -14,7 +14,7 @@ services:
     image: postgres:15
     restart: always
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data_dev:/var/lib/postgresql/data/
     # env_file:
     #   - .env.dev.db
     environment:
@@ -23,4 +23,4 @@ services:
       - POSTGRES_DB=config_django_dev
 
 volumes:
-  postgres_data:
+  postgres_data_dev:
